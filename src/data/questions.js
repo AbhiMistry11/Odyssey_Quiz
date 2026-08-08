@@ -5,17 +5,17 @@
  *
  * Each question:
  *  - id:               stable unique id
- *  - title:            short question name shown in the header
- *  - description:      the question itself (supports plain text,
+ *  - title:             short question name shown in the header
+ *  - description:       the question itself (supports plain text,
  *                        line breaks are respected)
  *  - image:              optional image URL/path, omit or leave null if unused
- *  - hint:                revealed only after the hint-penalty modal is confirmed
- *  - volunteer:        the named person a team brings their answer to for
- *                      in-person verification — always visible, no penalty
+ *  - hint:               revealed only after the hint-penalty modal is confirmed
+ *  - volunteer:          the named person a team brings their answer to for
+ *                        in-person verification — always visible, no penalty
  *  - verificationHash:  SHA-256 hex digest of the secret code that volunteer
- *                      hands the team once the answer is confirmed correct.
- *                      The plaintext code is NEVER stored in this file or
- *                      shipped to the browser — only its hash.
+ *                        hands the team once the answer is confirmed correct.
+ *                        The plaintext code is NEVER stored in this file or
+ *                        shipped to the browser — only its hash.
  *
  * To generate a new hash for a new secret code, run in any JS console
  * (the app uppercases + trims input before hashing, so do the same here):
@@ -41,7 +41,7 @@ export const questions = [
     hint: 'Refer the Contact Us page.',
     volunteer: 'Soham Wanganekar',
     verificationHash:
-      'bda1661ffbe1f7788d89edb74ea6221fffd6c316d701eed60211dc19383cf9d5',
+      'bda1661ffbe1f7788d89edb74ea622f1ffd6c316d701eed60211dc19383cf9d5',
   },
   {
     id: 2,
