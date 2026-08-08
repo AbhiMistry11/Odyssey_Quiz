@@ -7,9 +7,9 @@
  *  - id:               stable unique id
  *  - title:            short question name shown in the header
  *  - description:      the question itself (supports plain text,
- *                      line breaks are respected)
+ *                        line breaks are respected)
  *  - image:              optional image URL/path, omit or leave null if unused
- *  - hint:              revealed only after the hint-penalty modal is confirmed
+ *  - hint:                revealed only after the hint-penalty modal is confirmed
  *  - volunteer:        the named person a team brings their answer to for
  *                      in-person verification — always visible, no penalty
  *  - verificationHash:  SHA-256 hex digest of the secret code that volunteer
@@ -41,7 +41,7 @@ export const questions = [
     hint: 'Refer the Contact Us page.',
     volunteer: 'Soham Wanganekar',
     verificationHash:
-      '260339792f3f132df2c8de2c492510ed495ffe672355958000ce236124d5b2b9',
+      'bda1661ffbe1f7788d89edb74ea6221fffd6c316d701eed60211dc19383cf9d5',
   },
   {
     id: 2,
@@ -52,7 +52,7 @@ export const questions = [
     hint: 'Refer the Leadership page.',
     volunteer: 'Rugved Dange',
     verificationHash:
-      '214fe2b2b05c8095dc92e2fde4600583bbc78dc9a0452f7e42616a5a6c64bab0',
+      '58a0b91aa655f0107c9a2192c155e481d09c45b6c297bc35ee1cbe0de42ea10c',
   },
   {
     id: 3,
@@ -62,7 +62,7 @@ export const questions = [
     hint: 'Use the filters on the Events page.',
     volunteer: 'Srinidhi Bulusu',
     verificationHash:
-      '7ec747919889a7abe3b73281cca4193e3f9f7470252d01ee5af97589a5d56839',
+      'bb44d1f8164574af4f176e58796d1ece96370a56593aad287a67ec30f047ad01',
   },
   {
     id: 4,
@@ -72,7 +72,7 @@ export const questions = [
     hint: 'Refer the Management Commentary page.',
     volunteer: 'Nishant Borde',
     verificationHash:
-      'e042c0a4db73c523f55daaeb5f651b94ee4c4d93b93311cfd9f4b773d78edce1',
+      'a1a96231f379646d8d7d6f92ad20ded74f9b10c9a979038d0b0088c60a90f5f7',
   },
   {
     id: 5,
@@ -83,6 +83,6 @@ export const questions = [
     hint: 'Refer "California Notice at Collection" in the footer section.',
     volunteer: 'Bhushan Dike',
     verificationHash:
-      '5648bc363c5cddfac791ddea608cadd0256adad3a15cc866f61a60b2eba9f189',
+      '8013af9247415bc8f3ba07d9aa49718fcf2e3f0e4968422f71d4306fef07d0c2',
   },
 ];
