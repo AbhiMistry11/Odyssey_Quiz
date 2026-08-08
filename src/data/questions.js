@@ -5,17 +5,17 @@
  *
  * Each question:
  *  - id:               stable unique id
- *  - title:             short question name shown in the header
- *  - description:       the question itself (supports plain text,
- *                        line breaks are respected)
+ *  - title:            short question name shown in the header
+ *  - description:      the question itself (supports plain text,
+ *                      line breaks are respected)
  *  - image:              optional image URL/path, omit or leave null if unused
- *  - hint:                revealed only after the hint-penalty modal is confirmed
- *  - volunteer:          the named person a team brings their answer to for
- *                        in-person verification — always visible, no penalty
+ *  - hint:              revealed only after the hint-penalty modal is confirmed
+ *  - volunteer:        the named person a team brings their answer to for
+ *                      in-person verification — always visible, no penalty
  *  - verificationHash:  SHA-256 hex digest of the secret code that volunteer
- *                        hands the team once the answer is confirmed correct.
- *                        The plaintext code is NEVER stored in this file or
- *                        shipped to the browser — only its hash is.
+ *                      hands the team once the answer is confirmed correct.
+ *                      The plaintext code is NEVER stored in this file or
+ *                      shipped to the browser — only its hash.
  *
  * To generate a new hash for a new secret code, run in any JS console
  * (the app uppercases + trims input before hashing, so do the same here):
@@ -41,7 +41,7 @@ export const questions = [
     hint: 'Refer the Contact Us page.',
     volunteer: 'Soham Wanganekar',
     verificationHash:
-      '5584cdb7f330964a7066c05454951bfa7a35b73c1819bc8803ba9666455760c8',
+      '260339792f3f132df2c8de2c492510ed495ffe672355958000ce236124d5b2b9',
   },
   {
     id: 2,
@@ -52,7 +52,7 @@ export const questions = [
     hint: 'Refer the Leadership page.',
     volunteer: 'Rugved Dange',
     verificationHash:
-      '6993e9d7c0dae73b38d0bc248e6171aa8ea6ff45ebf89f50b8fdf155a148ff77',
+      '214fe2b2b05c8095dc92e2fde4600583bbc78dc9a0452f7e42616a5a6c64bab0',
   },
   {
     id: 3,
@@ -62,7 +62,7 @@ export const questions = [
     hint: 'Use the filters on the Events page.',
     volunteer: 'Srinidhi Bulusu',
     verificationHash:
-      '53a7f0ab79f875480cd20d4f5ea8bd8ae8ad75a413f8eb93a58e696b97ae57e6',
+      '7ec747919889a7abe3b73281cca4193e3f9f7470252d01ee5af97589a5d56839',
   },
   {
     id: 4,
@@ -72,7 +72,7 @@ export const questions = [
     hint: 'Refer the Management Commentary page.',
     volunteer: 'Nishant Borde',
     verificationHash:
-      'f25777f6745791ec6fe5300b013d875a54bbce3c7603e465d4a78b684a1f98cb',
+      'e042c0a4db73c523f55daaeb5f651b94ee4c4d93b93311cfd9f4b773d78edce1',
   },
   {
     id: 5,
@@ -83,6 +83,6 @@ export const questions = [
     hint: 'Refer "California Notice at Collection" in the footer section.',
     volunteer: 'Bhushan Dike',
     verificationHash:
-      '881fdf6caa5c9a9a3fef25b6acd21a99af6ce149d51fbe18e45012be204e605d',
+      '5648bc363c5cddfac791ddea608cadd0256adad3a15cc866f61a60b2eba9f189',
   },
 ];

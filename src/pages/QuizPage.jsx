@@ -249,7 +249,7 @@ export default function QuizPage() {
                       type="text"
                       value={code}
                       onChange={(e) => setCode(e.target.value)}
-                      placeholder="e.g. 101SOH"
+                      placeholder="e.g. A1B2C3"
                       autoComplete="off"
                       className="field-input min-h-[48px] flex-1 font-mono tracking-widest"
                     />
