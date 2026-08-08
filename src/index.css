@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overscroll-behavior-y: none;
+  }
+
+  body {
+    @apply bg-void-950 text-slate-100 font-body antialiased;
+    background-image: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(21, 104, 214, 0.22), transparent);
+    overscroll-behavior-y: none;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+
+  ::selection {
+    @apply bg-signal-blue/40 text-white;
+  }
+
+  /* Visible, deliberate focus states everywhere */
+  :focus-visible {
+    outline: 2px solid #69EAFC;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #081027;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #13254f;
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #1c3568;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply relative bg-white/[0.04] backdrop-blur-xl border border-white/10 rounded-3xl;
+  }
+
+  .text-gradient {
+    @apply bg-signal-gradient bg-clip-text text-transparent;
+  }
+
+  .btn-glow-primary {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-2xl px-7 py-3.5
+    font-display font-semibold text-void-950 bg-signal-gradient
+    shadow-glow transition-transform duration-200 ease-out
+    hover:scale-[1.03] active:scale-[0.98] focus-visible:scale-[1.03];
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl px-7 py-3.5
+    font-display font-semibold text-slate-100 border border-white/15 bg-white/[0.03]
+    transition-all duration-200 hover:border-signal-cyan/60 hover:bg-white/[0.07];
+  }
+
+  .field-label {
+    @apply block text-xs font-mono uppercase tracking-[0.18em] text-slate-400 mb-2;
+  }
+
+  .field-input {
+    @apply w-full rounded-xl bg-void-900/80 border border-white/10 px-4 py-3
+    text-slate-100 placeholder:text-slate-500 font-body
+    focus:border-signal-cyan/70 focus:ring-2 focus:ring-signal-cyan/20 transition-colors outline-none;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04]
+    px-3 py-1 text-xs font-mono uppercase tracking-wider text-slate-300;
+  }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
