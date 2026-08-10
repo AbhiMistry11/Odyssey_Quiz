@@ -33,6 +33,8 @@ export default function QuizPage() {
     currentIndex,
     solvedIds,
     hintsUsed,
+    hintsRemaining,
+    maxHints,
     goToQuestion,
     useHint,
     submitVerificationCode,
@@ -53,6 +55,7 @@ export default function QuizPage() {
   const question = questions[currentIndex];
   const isCurrentSolved = question ? solvedIds.includes(question.id) : false;
   const hintRevealed = question ? Boolean(hintsUsed[question.id]) : false;
+  const hintsExhausted = hintsRemaining <= 0;
   const timeUrgent = remaining <= 30 && status === 'in-progress';
   const timeLow = remaining <= 120 && status === 'in-progress';
 
@@ -112,9 +115,17 @@ export default function QuizPage() {
   };
 
   const confirmHint = () => {
+    if (hintsExhausted) {
+      setHintModalOpen(false);
+      return;
+    }
     useHint(question.id);
     setHintModalOpen(false);
-    showToast(`Hint revealed — +${HINT_PENALTY_SECONDS}s added to your clock.`, 'info');
+    showToast(
+      `Hint revealed — +${HINT_PENALTY_SECONDS}s added. ${Math.max(hintsRemaining - 1, 0)} hint${hintsRemaining - 1 === 1 ? '' : 's'
+      } left.`,
+      'info'
+    );
   };
 
   const canGoNext = currentIndex < solvedCount && currentIndex < questions.length - 1;
@@ -163,7 +174,13 @@ export default function QuizPage() {
           <span>
             Q{currentIndex + 1} / {questions.length}
           </span>
-          <span>{solvedCount} verified</span>
+          <span className="flex items-center gap-2">
+            <span>{solvedCount} verified</span>
+            <span className="text-slate-700">·</span>
+            <span className={hintsExhausted ? 'text-rose-400' : ''}>
+              {hintsRemaining}/{maxHints} hints left
+            </span>
+          </span>
         </div>
         <SignalPath total={questions.length} currentIndex={currentIndex} solvedCount={solvedCount} />
       </div>
@@ -225,15 +242,21 @@ export default function QuizPage() {
                     <p className="text-sm text-amber-100/90">{question.hint}</p>
                   </div>
                 ) : (
-                  !isCurrentSolved && (
+                  !isCurrentSolved &&
+                  (hintsExhausted ? (
+                    <p className="inline-flex min-h-[44px] items-center gap-1.5 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-2.5 text-sm text-slate-500">
+                      <HiOutlineLightBulb className="h-4 w-4" /> No hints left for this run
+                    </p>
+                  ) : (
                     <button
                       type="button"
                       onClick={() => setHintModalOpen(true)}
                       className="inline-flex min-h-[44px] items-center gap-1.5 rounded-xl border border-white/10 px-4 py-2.5 text-sm text-slate-300 transition-colors hover:border-amber-400/40 hover:text-amber-300"
                     >
-                      <HiOutlineLightBulb className="h-4 w-4" /> Reveal hint (+{HINT_PENALTY_SECONDS}s)
+                      <HiOutlineLightBulb className="h-4 w-4" /> Reveal hint (+{HINT_PENALTY_SECONDS}s ·{' '}
+                      {hintsRemaining} left)
                     </button>
-                  )
+                  ))
                 )}
               </div>
 
@@ -311,7 +334,9 @@ export default function QuizPage() {
       >
         <p className="text-sm leading-relaxed text-slate-300">
           Using a hint will add <span className="font-semibold text-amber-300">{HINT_PENALTY_SECONDS} seconds</span> to
-          your total time, applied immediately. This can only be used once per question. Continue?
+          your total time, applied immediately. Your team has{' '}
+          <span className="font-semibold text-slate-100">{hintsRemaining}</span> of {maxHints} hints left for the
+          whole run — this can only be used once per question. Continue?
         </p>
         <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
           <button type="button" onClick={() => setHintModalOpen(false)} className="btn-ghost min-h-[44px]">

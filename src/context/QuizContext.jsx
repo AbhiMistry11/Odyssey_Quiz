@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useReducer } from 'react';
 import { questions, HINT_PENALTY_SECONDS } from '../data/questions';
-import { MAX_QUIZ_SECONDS } from '../constants/site';
+import { MAX_QUIZ_SECONDS, MAX_HINTS_PER_TEAM } from '../constants/site';
 import { verifyCode } from '../utils/crypto';
 
 /**
@@ -32,13 +32,19 @@ function reducer(state, action) {
         status: 'in-progress',
         startedAt: Date.now(),
       };
-    case 'USE_HINT':
-      if (state.hintsUsed[action.payload]) return state;
+    case 'USE_HINT': {
+      const hintsUsedCount = Object.keys(state.hintsUsed).length;
+      // Already revealed for this question, or the team has spent its full
+      // hint budget for the run — either way, do nothing.
+      if (state.hintsUsed[action.payload] || hintsUsedCount >= MAX_HINTS_PER_TEAM) {
+        return state;
+      }
       return {
         ...state,
         hintsUsed: { ...state.hintsUsed, [action.payload]: true },
         penaltySeconds: state.penaltySeconds + HINT_PENALTY_SECONDS,
       };
+    }
     case 'SOLVE_QUESTION': {
       if (state.solvedIds.includes(action.payload)) return state;
       const solvedIds = [...state.solvedIds, action.payload];
@@ -123,18 +129,24 @@ export function QuizProvider({ children }) {
     return () => clearInterval(interval);
   }, [state.status, state.startedAt, state.penaltySeconds]);
 
+  const hintsUsedCount = Object.keys(state.hintsUsed).length;
+  const hintsRemaining = Math.max(0, MAX_HINTS_PER_TEAM - hintsUsedCount);
+
   const value = useMemo(
     () => ({
       ...state,
       totalQuestions: questions.length,
       maxQuizSeconds: MAX_QUIZ_SECONDS,
+      maxHints: MAX_HINTS_PER_TEAM,
+      hintsUsedCount,
+      hintsRemaining,
       registerTeam,
       useHint,
       goToQuestion,
       submitVerificationCode,
       reset,
     }),
-    [state, registerTeam, useHint, goToQuestion, submitVerificationCode, reset]
+    [state, hintsUsedCount, hintsRemaining, registerTeam, useHint, goToQuestion, submitVerificationCode, reset]
   );
 
   return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>;

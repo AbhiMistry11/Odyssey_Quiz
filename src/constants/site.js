@@ -5,6 +5,7 @@ export const EVENT_TAGLINE =
   'A guided knowledge odyssey — solve, get verified, and race the clock.';
 
 export const MAX_QUIZ_SECONDS = 10 * 60; // 10-minute hard cap, auto-submits on timeout
+export const MAX_HINTS_PER_TEAM = 3; // total hints allowed across the whole run, not per question
 
 export const RULES = [
   {
@@ -24,8 +25,8 @@ export const RULES = [
     body: 'A volunteer checks your answer in person and hands you the code to unlock the next step.',
   },
   {
-    title: 'Hints cost time',
-    body: 'Every hint you reveal adds a fixed penalty straight onto your final clock.',
+    title: `${MAX_HINTS_PER_TEAM} hints, whole run`,
+    body: `Your team gets ${MAX_HINTS_PER_TEAM} hints total across all 5 questions, each adding a time penalty. Spend them wisely.`,
   },
   {
     title: '10-minute clock',
